@@ -3,16 +3,18 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
-    
+#deck of cards    
 class Deck:
     def __init__(self, ranks, suits):
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
 
+#draw card from deck
     def draw(self):
         if len(self.cards) == 0:
             return None
         return self.cards.pop()
-   
+ 
+ #draw up to hand limit  
     def drawHandLimit(self, hand_deck, limit):
         for i in range(limit):
             card = self.draw()
@@ -20,6 +22,14 @@ class Deck:
                 hand_deck.cards.append(card)
             else:
                 break
+
+#play card from hand
+    def playCard(self, playRank, playSuit):
+        for card in hand_deck.cards:
+            if card.rank == playRank and card.suit == playSuit:
+              hand_deck.cards.remove(card)
+              return card
+        return None
 
 HANDLIMIT = 8
 
@@ -48,11 +58,18 @@ discard_deck = Deck([], [])
 # Hand of cards
 hand_deck = Deck([], [])
 
-# activeCastleCard = kings_deck.draw()
-# print(activeCastleCard.rank, activeCastleCard.suit)
+activeEnemyCard = kings_deck.draw()
+print("Active Enemy Card:\n", activeEnemyCard.rank, activeEnemyCard.suit)
 
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
-print("HAND:")
+print("\nHAND:")
 for card in hand_deck.cards:
     print(card.rank, card.suit)
+
+#play card from hand
+playRank = input("\nEnter the rank of the card to play: ")
+playSuit = input ("\nEnter the suit of the card to play: ")
+
+activePlayerCard = hand_deck.playCard(playRank, playSuit)
+print("\nActive Player Card:", activePlayerCard.rank, activePlayerCard.suit)

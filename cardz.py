@@ -1,79 +1,57 @@
-import random
-
 class Card:
-    def __init__(self, suit, rank, name):
-        self.suit = suit
+    def __init__(self, rank, suit):
         self.rank = rank
-        self.name = name
-
+        self.suit = suit
+    
 class Deck:
-    def __init__(self, suit, rank, name):
-        self.suit = suit
-        self.rank = rank
-        self.name = name
+    def __init__(self, ranks, suits):
+        self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
 
-    def Shuffle(self):
-        random.shuffle(self.cards)
-    
-    def DrawReveal(self, amount):
-        drawn = []
-        for i in range(amount):
-            drawn.append(self.cards.pop())
-        return drawn
-
-class CorruptCrowns:
-    def __init__(self):
-        self.corruptCrowns = 0
-    
-    def AddToDiscard(selfcard, discard):
-        discard.append(Card)
-        return discard
-    
-    def AddToBottomTavern(self,amount, tavern, Card):
-        tavern.append(Card)
-        return tavern
-
-    def AddToHand(self,amount, hand, card):
-        hand.append(Card)
-        return hand
-
-    def ShowHand(self,hand):
-        return hand
-    
-
-
-if __name__ == "__main__":
+    def draw(self):
+        if len(self.cards) == 0:
+            return None
+        return self.cards.pop()
    
-  game = CorruptCrowns()
+    def drawHandLimit(self, hand_deck, limit):
+        for i in range(limit):
+            card = self.draw()
+            if card is not None:
+                hand_deck.cards.append(card)
+            else:
+                break
 
-suitCastleDeckJ = ["S", "H", "D", "C"]
-rankCastleDeckJ = ["J"]
-castleDeckJ = game(suitCastleDeckJ, rankCastleDeckJ, "castleJ")
+HANDLIMIT = 8
 
-suitCastleDeckQ = ["S", "H", "D", "C"]
-rankCastleDeckQ = ["Q"]
-castleDeckQ = game(suitCastleDeckQ, rankCastleDeckQ, "castleQ")
+# Castle Deck Jacks
+castleDeck1 = ["J"]
+suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+jacks_deck = Deck(castleDeck1, suits)
 
-suitCastleDeckK = ["S", "H", "D", "C"]
-rankCastleDeckK = ["K"]
-castleDeckK = game(suitCastleDeckK, rankCastleDeckK, "castleK")
+# Castle Deck Queens
+castleDeck2 = ["Q"]
+suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+queens_deck = Deck(castleDeck2, suits)
 
-suitTavernDeck = ["S", "H", "D", "C"]
-rankTavernDeck = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-tavernDeck = game(suitTavernDeck, rankTavernDeck, "tavern")
+# Castle Deck Kings
+castleDeck3 = ["K"]
+suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+kings_deck = Deck(castleDeck3, suits)
 
-handDeck = []
+# Draw deck
+draw_ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+draw_deck = Deck(draw_ranks, suits)
 
-discardDeck = []
+# Discard deck 
+discard_deck = Deck([], [])
 
-castleDeck = castleDeckJ + castleDeckQ + castleDeckKs
+# Hand of cards
+hand_deck = Deck([], [])
 
-tavernDeck = tavernDeck.shuffle()
+# activeCastleCard = kings_deck.draw()
+# print(activeCastleCard.rank, activeCastleCard.suit)
 
-handDeck = game.DrawReveal(8, tavernDeck)
-
-print(handDeck)
-
-
-
-  
+# Drawing up to hand limit. Maybe change in a method to start game.
+draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
+print("HAND:")
+for card in hand_deck.cards:
+    print(card.rank, card.suit)

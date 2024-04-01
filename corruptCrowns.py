@@ -3,6 +3,7 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
+
 #deck of cards    
 class Deck:
     def __init__(self, ranks, suits):
@@ -61,6 +62,12 @@ hand_deck = Deck([], [])
 activeEnemyCard = kings_deck.draw()
 print("Active Enemy Card:\n", activeEnemyCard.rank, activeEnemyCard.suit)
 
+print("")
+print("\t\t\tHearts: Heal, add cards to bottom of draw from discard equal to rank played.")
+print("\t\t\tDiamonds: Draw, draw cards from draw deck equal to rank played.")
+print("\t\t\tClubs: Attack, double damage to enemy.")
+print("\t\t\tSpades: Defend, reduce damage by rank played. Stacks against same enemy.")
+print("\t\t\t")
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
 print("\nHAND:")

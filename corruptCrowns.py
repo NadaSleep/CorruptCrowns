@@ -4,9 +4,16 @@ class Card:
         self.rank = rank
         self.suit = suit
 
-    # def suitPower(self):
+     def suitPower(self):
+        if self.suit == "Hearts":
+            return 1
+        elif self.suit == "Diamonds":
+            return 2
+        elif self.suit == "Clubs":
+            return 3
+        elif self.suit == "Spades":
+            return 4
         
-
 #deck of cards    
 class Deck:
     def __init__(self, ranks, suits):

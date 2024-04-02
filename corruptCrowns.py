@@ -4,6 +4,9 @@ class Card:
         self.rank = rank
         self.suit = suit
 
+    # def suitPower(self):
+        
+
 #deck of cards    
 class Deck:
     def __init__(self, ranks, suits):
@@ -70,13 +73,16 @@ print("\t\t\tSpades: Defend, reduce damage by rank played. Stacks against same e
 print("\t\t\t")
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
-print("\nHAND:")
+print("HAND:")
 for card in hand_deck.cards:
     print(card.rank, card.suit)
 
 #play card from hand
 playRank = input("\nEnter the rank of the card to play: ")
 playSuit = input ("\nEnter the suit of the card to play: ")
+ 
 
 activePlayerCard = hand_deck.playCard(playRank, playSuit)
 print("\nActive Player Card:", activePlayerCard.rank, activePlayerCard.suit)
+
+

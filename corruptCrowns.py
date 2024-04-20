@@ -1,31 +1,25 @@
-#classes
+# classes
+
+# individual cards
 class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
 
-     def suitPower(self):
-        if self.suit == "Hearts":
-            return 1
-        elif self.suit == "Diamonds":
-            return 2
-        elif self.suit == "Clubs":
-            return 3
-        elif self.suit == "Spades":
-            return 4
-        
-#deck of cards    
+#   def suitPower(self):
+
+# deck of cards
 class Deck:
     def __init__(self, ranks, suits):
         self.cards = [Card(rank, suit) for rank in ranks for suit in suits]
 
-#draw card from deck
+# draw card from deck
     def draw(self):
         if len(self.cards) == 0:
             return None
         return self.cards.pop()
  
- #draw up to hand limit  
+ # draw up to hand limit
     def drawHandLimit(self, hand_deck, limit):
         for i in range(limit):
             card = self.draw()
@@ -34,7 +28,7 @@ class Deck:
             else:
                 break
 
-#play card from hand
+# play card from hand
     def playCard(self, playRank, playSuit):
         for card in hand_deck.cards:
             if card.rank == playRank and card.suit == playSuit:
@@ -45,22 +39,22 @@ class Deck:
 HANDLIMIT = 8
 
 # Castle Deck Jacks
-castleDeck1 = ["J"]
 suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+
+castleDeck1 = ["J"]
 jacks_deck = Deck(castleDeck1, suits)
 
 # Castle Deck Queens
 castleDeck2 = ["Q"]
-suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
 queens_deck = Deck(castleDeck2, suits)
 
 # Castle Deck Kings
 castleDeck3 = ["K"]
-suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
 kings_deck = Deck(castleDeck3, suits)
 
 # Draw deck
 draw_ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
 draw_deck = Deck(draw_ranks, suits)
 
 # Discard deck 

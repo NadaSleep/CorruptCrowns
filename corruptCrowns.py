@@ -1,3 +1,4 @@
+import random
 # classes
 
 # individual cards
@@ -36,6 +37,9 @@ class Deck:
               return card
         return None
 
+    def shuffle(self):
+       random.shuffle(self.cards)
+
 HANDLIMIT = 8
 
 # Castle Deck Jacks
@@ -72,8 +76,12 @@ print("\t\t\tDiamonds: Draw, draw cards from draw deck equal to rank played.")
 print("\t\t\tClubs: Attack, double damage to enemy.")
 print("\t\t\tSpades: Defend, reduce damage by rank played. Stacks against same enemy.")
 print("\t\t\t")
+
+# Method that shuffles the draw deck
+draw_deck.shuffle()
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
+
 print("HAND:")
 for card in hand_deck.cards:
     print(card.rank, card.suit)

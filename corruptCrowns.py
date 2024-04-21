@@ -7,8 +7,6 @@ class Card:
         self.rank = rank
         self.suit = suit
 
-#   def suitPower(self):
-
 # deck of cards
 class Deck:
     def __init__(self, ranks, suits):
@@ -31,6 +29,7 @@ class Deck:
 
 # play card from hand
     def playCard(self, playRank, playSuit):
+        playSuit = playSuit.upper()
         for card in hand_deck.cards:
             if card.rank == playRank and card.suit == playSuit:
               hand_deck.cards.remove(card)
@@ -40,10 +39,16 @@ class Deck:
     def shuffle(self):
        random.shuffle(self.cards)
 
+
+    def printHand(self):
+        for card in self.cards:
+          print(card.rank, card.suit)
+
+
 HANDLIMIT = 8
 
 # Castle Deck Jacks
-suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+suits = ['S', 'H', 'D', 'C']
 
 castleDeck1 = ["J"]
 jacks_deck = Deck(castleDeck1, suits)
@@ -81,10 +86,8 @@ print("\t\t\t")
 draw_deck.shuffle()
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
-
-print("HAND:")
-for card in hand_deck.cards:
-    print(card.rank, card.suit)
+# Display hand of cards
+hand_deck.printHand()
 
 #play card from hand
 playRank = input("\nEnter the rank of the card to play: ")

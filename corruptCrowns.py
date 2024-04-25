@@ -6,7 +6,31 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
-
+    
+    def suitPower(self,rank,suit):
+        if self.suit == 'H':
+            # Shuffle the discard pile
+            random.shuffle(discard_deck.cards)
+            # Count out a number of cards facedown equal to the attack value played            
+            for i in range(self.rank):
+                card = discard_deck.cards.pop()
+                # Place the card on the bottom of the draw deck
+                draw_deck.cards.insert(0, card)
+            pass
+        elif self.suit == 'D':
+            # Apply draw action
+            # Draw cards from draw deck equal to rank played
+            pass
+        elif self.suit == 'C':
+            # Apply attack action
+            # Double damage to enemy
+            pass
+        elif self.suit == 'S':
+            # Apply defend action
+            # Reduce damage by rank played
+            pass
+    
+      
 # deck of cards
 class Deck:
     def __init__(self, ranks, suits):
@@ -40,7 +64,7 @@ class Deck:
        random.shuffle(self.cards)
 
 
-    def printHand(self):
+    def showHand(self):
         for card in self.cards:
           print(card.rank, card.suit)
 
@@ -73,7 +97,7 @@ discard_deck = Deck([], [])
 hand_deck = Deck([], [])
 
 activeEnemyCard = kings_deck.draw()
-print("Active Enemy Card:\n", activeEnemyCard.rank, activeEnemyCard.suit)
+print("\nActive Enemy Card:\n", activeEnemyCard.rank, activeEnemyCard.suit)
 
 print("")
 print("\t\t\tHearts: Heal, add cards to bottom of draw from discard equal to rank played.")
@@ -84,17 +108,28 @@ print("\t\t\t")
 
 # Method that shuffles the draw deck
 draw_deck.shuffle()
+
+print("\nCards in draw deck:")
+draw_deck.showHand()
+
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
 # Display hand of cards
-hand_deck.printHand()
+print("\nCards in hand:")
+hand_deck.showHand()
 
 #play card from hand
 playRank = input("\nEnter the rank of the card to play: ")
-playSuit = input ("\nEnter the suit of the card to play: ")
+playSuit = input("\nEnter the suit of the card to play: ").upper()
  
-
-activePlayerCard = hand_deck.playCard(playRank, playSuit)
+activePlayerCard = Card(playRank, playSuit)
 print("\nActive Player Card:", activePlayerCard.rank, activePlayerCard.suit)
+
+activePlayerCard.suitPower(activePlayerCard.rank, activePlayerCard.suit)    
+
+print("\nCards in draw deck:")
+draw_deck.showHand()
+
+
 
 

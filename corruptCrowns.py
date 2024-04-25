@@ -8,17 +8,28 @@ class Card:
         self.suit = suit
     
     def suitPower(self,rank,suit):
-        if self.suit == 'H':
-            # Shuffle the discard pile
-            random.shuffle(discard_deck.cards)
-            # Count out a number of cards facedown equal to the rank of active card           
-            for i in range(self.rank):
-                card = discard_deck.cards.pop()
-                # Place the cards on bottom of the draw deck
-                draw_deck.cards.insert(0, card)
-            pass
+        if rank.upper() == "A":
+            rank = 1
+        else:
+           rank = int(rank)
 
-        elif self.suit == 'D':
+        if self.suit == 'H':
+            print("\nattack power: ", rank)
+
+            if len(discard_deck.cards) == 0:
+                print("\nNo cards in discard\n")
+            else:
+                # Shuffle the discard pile
+                random.shuffle(discard_deck.cards)
+                # Count out a number of cards facedown equal to the rank of active card           
+                for i in range(rank):
+                    card = discard_deck.cards.pop()
+                    # Place the cards on bottom of the draw deck
+                    draw_deck.cards.insert(0, card)
+                pass
+                   
+        elif self.suit == 'D':        
+          print("\nattack power: ", rank)
           while len(hand_deck.cards) < HANDLIMIT:
             card = draw_deck.draw()
             if card:
@@ -29,16 +40,17 @@ class Card:
 
 
         elif self.suit == 'C':
-            # Apply attack action
-            # Double damage to enemy
+            attackPower = int(rank) * 2
+            print("\nattack power: ", attackPower)        
             pass
 
 
 
         elif self.suit == 'S':
+          print("\nattack power: ", rank)
           defense = 0
           defense += int(rank)
-          print("\nDefense:", defense)
+          print("Defense:", defense)
 
       
 # deck of cards
@@ -81,9 +93,10 @@ class Deck:
 
 HANDLIMIT = 8
 
-# Castle Deck Jacks
+# suits
 suits = ['S', 'H', 'D', 'C']
 
+# Castle Deck Jacks
 castleDeck1 = ["J"]
 jacks_deck = Deck(castleDeck1, suits)
 
@@ -97,7 +110,6 @@ kings_deck = Deck(castleDeck3, suits)
 
 # Draw deck
 draw_ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-
 draw_deck = Deck(draw_ranks, suits)
 
 # Discard deck 
@@ -106,7 +118,7 @@ discard_deck = Deck([], [])
 # Hand of cards
 hand_deck = Deck([], [])
 
-activeEnemyCard = kings_deck.draw()
+activeEnemyCard = jacks_deck.draw()
 print("\nActive Enemy Card:\n", activeEnemyCard.rank, activeEnemyCard.suit)
 
 print("")
@@ -130,7 +142,14 @@ playRank = input("\nEnter the rank of the card to play: ")
 playSuit = input("\nEnter the suit of the card to play: ").upper()
  
 activePlayerCard = Card(playRank, playSuit)
+
+hand_deck.playCard(activePlayerCard.rank, activePlayerCard.suit)
+
+hand_deck.showHand
+
 print("\nActive Player Card:", activePlayerCard.rank, activePlayerCard.suit)
+
+
 
 activePlayerCard.suitPower(activePlayerCard.rank, activePlayerCard.suit)    
 

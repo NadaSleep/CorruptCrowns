@@ -11,25 +11,35 @@ class Card:
         if self.suit == 'H':
             # Shuffle the discard pile
             random.shuffle(discard_deck.cards)
-            # Count out a number of cards facedown equal to the attack value played            
+            # Count out a number of cards facedown equal to the rank of active card           
             for i in range(self.rank):
                 card = discard_deck.cards.pop()
-                # Place the card on the bottom of the draw deck
+                # Place the cards on bottom of the draw deck
                 draw_deck.cards.insert(0, card)
             pass
+
         elif self.suit == 'D':
-            # Apply draw action
-            # Draw cards from draw deck equal to rank played
+          while len(hand_deck.cards) < HANDLIMIT:
+            card = draw_deck.draw()
+            if card:
+                hand_deck.cards.append(card)
+            else:
+                break    
             pass
+
+
         elif self.suit == 'C':
             # Apply attack action
             # Double damage to enemy
             pass
+
+
+
         elif self.suit == 'S':
-            # Apply defend action
-            # Reduce damage by rank played
-            pass
-    
+          defense = 0
+          defense += int(rank)
+          print("\nDefense:", defense)
+
       
 # deck of cards
 class Deck:
@@ -109,9 +119,6 @@ print("\t\t\t")
 # Method that shuffles the draw deck
 draw_deck.shuffle()
 
-print("\nCards in draw deck:")
-draw_deck.showHand()
-
 # Drawing up to hand limit. Maybe change in a method to start game.
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
 # Display hand of cards
@@ -127,8 +134,8 @@ print("\nActive Player Card:", activePlayerCard.rank, activePlayerCard.suit)
 
 activePlayerCard.suitPower(activePlayerCard.rank, activePlayerCard.suit)    
 
-print("\nCards in draw deck:")
-draw_deck.showHand()
+print("\nCards in hand:")
+hand_deck.showHand()
 
 
 

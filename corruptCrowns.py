@@ -54,27 +54,6 @@ class Card:
           defense += int(rank)
           print("Defense:", defense)
 
-#   def checkDamage(self, activePlayerCard, activeEnemyCard):
-
-# class JEnemyCard:
-#     def __init__(self, suit, health = 20, attack = 10):
-#         self.suit = suit
-#         self.health = health
-#         self.attack = attack    
-
-# class QEnemyCard:
-#     def __init__(self, suit, health = 30, attack = 15):
-       
-#         self.suit = suit
-#         self.health = health
-#         self.attack = attack
-
-# class KEnemyCard:
-#     def __init__(self, suit, health = 40, attack = 20):
-#         self.suit = suit
-#         self.health = health
-#         self.damage = attack
-
 # deck of cards
 class Deck:
     def __init__(self, ranks, suits):
@@ -187,7 +166,7 @@ print("\nActive Enemy Card:\n", activeEnemyCard.rank, activeEnemyCard.suit)
 
 # Cheat sheet for the suit effects
 print("")
-print("\t\t\tHearts: Heal, add cards to bottom of draw from discard equal to rank played.")
+print("\t\t\tHearts: Heal, add cards to the bottom of the draw from the discard pile equal to rank played.")
 print("\t\t\tDiamonds: Draw, draw cards from draw deck equal to rank played.")
 print("\t\t\tClubs: Attack, double damage to enemy.")
 print("\t\t\tSpades: Defend, reduce damage by rank played. Stacks against same enemy.")
@@ -196,7 +175,7 @@ print("\t\t\t")
 # Method that shuffles the draw deck
 draw_deck.shuffle()
 
-# Drawing up to hand limit. Maybe change in a method to start game.
+# Drawing up to hand limit
 draw_deck.drawHandLimit(hand_deck, HANDLIMIT)
 # Display hand of cards
 print("\nCards in hand:")
@@ -210,7 +189,7 @@ activePlayerCard = Card(playRank, playSuit)
 # play card
 hand_deck.playCard(activePlayerCard.rank, activePlayerCard.suit)
 # Display hand of cards
-hand_deck.showHand
+hand_deck.showHand()
 # Print active player card
 print("\nActive Player Card:", activePlayerCard.rank, activePlayerCard.suit)
 # Suit power
